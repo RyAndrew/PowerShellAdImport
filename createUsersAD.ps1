@@ -1,7 +1,9 @@
 <#
  Update: version 1.1 added splatting
 
-Just add fisrtname, lastname in the csv and place on C:\ as users.csv 
+Okta Version 1.2, see VersionHistory.txt
+
+Just add fisrtname, lastname in the csv and place on C:\ as users.csv
 Example:-
 
                             ******** ##### ********
@@ -25,7 +27,9 @@ If (!(Get-module ActiveDirectory )) {
   Clear-Host
   }
 
-$Users=Import-csv c:\users_adimport.csv
+$filename=$args[0];
+
+$Users=Import-csv $filename;
 $a=1;
 $b=1;
 $failedUsers = @()
@@ -34,15 +38,39 @@ $VerbosePreference = "Continue"
 $ErrorActionPreference='stop'
 $LogFolder = "$env:userprofile\desktop\logs"
 
+$Orgs = "Employees","Interns","Partners"
+foreach ($Org in $Orgs) {
+Try {
+   New-ADOrganizationalUnit -Name "$Org"
+}
+Catch {
+   Write-Verbose "OU=$Org already exists"
+}
+}
+
+
  ForEach($User in $Users)
    {
    $FirstName = $User.FirstName.substring(0,1).toupper()+$User.FirstName.substring(1).tolower()
    $LastName  = $User.LastName.substring(0,1).toupper()+$User.LastName.substring(1).tolower()
 
    $FullName = $User.FirstName + " " + $User.LastName
-   $Title = $User.Title
+   $Organization = "Okta Ice"
+   
+   $groups = $User.Groups -split ';'
+   foreach ($group in $groups) {
+		if ( !($group -eq "")) {
+			try {
+				$exgroup=Get-ADGroup -Identity "$group";
+			}
+			catch {
+				echo "Creating group: $group";
+				New-ADGroup -Name "$group" -GroupScope "Global" -Path "OU=employees,DC=oktaice,DC=local";
+			}
+		}
+	}
 
-   $SAM = $User.firstName + "." + $User.lastName 
+   $SAM = $User.firstName + "." + $User.lastName
    <#
    $Sam=$User.FirstName+$User.LastName --> example john snow will be Johnsnow
    $Sam=$User.FirstName --> example john snow will be John
@@ -57,35 +85,52 @@ $LogFolder = "$env:userprofile\desktop\logs"
    # To set Diffreent Passwords for each User add header Password on CSV and change 'P@ssw0rd@123' to $user.passsword
    $Password = (ConvertTo-SecureString -AsPlainText 'Tra!nme4321' -Force)
 
-   
-   $UPN = $SAM + "$dnsroot" # change "$dnsroot to custom domain if you want, by default it will take from DNS ROOT"
 
-   $OU="OU=Workers,DC=oktaice,DC=local" # Choose an Ou where users will be created # Running cmd will show all OU's Get-ADOrganizationalUnit -Filter * | Select-Object -Property DistinguishedName| Out-GridView -PassThru| Select-Object -ExpandProperty DistinguishedName
+   $UPN=$User.email # change "$dnsroot to custom domain if you want, by default it will take from DNS ROOT"
 
-   $email=$Sam + "@oktaice.com" # change "$dnsroot to custom domain if you want, by default it will take from DNS ROOT"
+   $OU=$User.OU # Choose an Ou where users will be created # Running cmd will show all OU's Get-ADOrganizationalUnit -Filter * | Select-Object -Property DistinguishedName| Out-GridView -PassThru| Select-Object -ExpandProperty DistinguishedName
+
+   $email=$User.email # change "$dnsroot to custom domain if you want, by default it will take from DNS ROOT"
+
+$Title=$User.Title
+$Phone=$User.Phone
+$Dept=$User.Department
+
 
 Try {
     if (!(get-aduser -Filter {samaccountname -eq "$SAM"})){
      $Parameters = @{
-    'SamAccountName'        = $Sam
-    'UserPrincipalName'     = $UPN 
+    'SamAccountName'        = $SAM
+    'UserPrincipalName'     = $UPN
     'Name'                  = $Fullname
-    'EmailAddress'          = $Email 
-    'GivenName'             = $FirstName 
-    'Surname'               = $Lastname 
+    'EmailAddress'          = $Email
+    'GivenName'             = $FirstName
+    'Surname'               = $Lastname
+    'OfficePhone'           = $Phone
     'Title'                 = $Title
-    'AccountPassword'       = $password 
-    'ChangePasswordAtLogon' = $false # Set False if you do not want user to change password at next logon.
-    'Enabled'               = $true 
+    'Department'            = $Dept
+    'Organization'          = $Organization
+    'AccountPassword'       = $password
+    'ChangePasswordAtLogon' = $false
+    'Enabled'               = $true
     'Path'                  = $OU
-    'PasswordNeverExpires'  = $true # Set True if Password should expire as set on GPO.
+    'PasswordNeverExpires'  = $true
 }
 
 New-ADUser @Parameters
      Write-Verbose "[PASS] Created $FullName "
      $successUsers += $FullName + "," +$SAM
+	 foreach ($group in $groups) {
+		if ( !($group -eq "")) {
+			echo "Adding to $group";
+			Add-ADGroupMember "$group" $SAM;
+		}
+	}
+        if ( !($User.Manager -eq "")) {
+           Set-ADUser -Identity $SAM -Manager $User.Manager
+	}
     }
-   
+
 }
 Catch {
     Write-Warning "[ERROR]Can't create user [$($FullName)] : $_"
@@ -94,7 +139,7 @@ Catch {
 }
 if ( !(test-path $LogFolder)) {
     Write-Verbose "Folder [$($LogFolder)] does not exist, creating"
-    new-item $LogFolder -type directory -Force 
+    new-item $LogFolder -type directory -Force
 }
 
 
@@ -111,4 +156,3 @@ Write-Host "$su Users Successfully Created "  -NoNewline -ForegroundColor green
 Write-Host "--> Launching LogsFolder have a Look and review." -ForegroundColor Magenta
 Start-Sleep -Seconds 5
 Invoke-Item $LogFolder
-
