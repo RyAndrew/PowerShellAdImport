@@ -1,0 +1,33 @@
+FirstName,LastName,login,email,OU,Phone,Department,Title,Manager,Street,City,State,Zip,info,Groups
+Michael,Black,michael.black,michael.black@oktaice.com,"OU=employees",925-321-1000ext 116,,CEO,,1239 East Palo Alto Road,Atherton,CA,87909,Vanilla,Management;O365;US West
+Emily,Boone,emily.boone,emily.boone@oktaice.com,"OU=employees",925-321-1000ext 105,HR,HR Manager,"CN=Michael Black,OU=Employees",5693 East Ave,Millbrae,CA,76831,Pecan,HR;Management;US West
+Sarah,James,sarah.james,sarah.james@oktaice.com,"OU=employees",925-321-1000ext 119,,CTO,"CN=Emily Boone,OU=Employees",98 W 56th Ave.,New York,NY,78969,Rocky Road,Engineering;Management;US East
+Joseph,Baker,joseph.baker,joseph.baker@oktaice.com,"OU=employees",925-321-1000ext 112,Engineering,Director Engineering,"CN=Sarah James,OU=Employees",1298 Dirsync Way,San Mateo,CA,99809,Mint,Management;Sales;US West
+James,Parks,james.parks,james.parks@oktaice.com,"OU=employees",925-321-1000ext 110,Marketing,Director of Marketing,"CN=Michael Black,OU=Employees",1 St Francis Place #3129,San Francisco,CA,98733,Vanilla,Management;Marketing;US West
+Ana,Walters,ana.walters,ana.walters@oktaice.com,"OU=employees",925-321-1000ext 102,Sales,Director of Sales,"CN=Michael Black,OU=Employees",23412 24th Street,San Francisco,CA,99989,Vanilla,Management;Sales;US West
+Adam,Willems,adam.willems,adam.willems@oktaice.com,"OU=employees",925-321-1000ext 100,Sales,Sales Engineer,"CN=Ana Walters,OU=Employees",12 South Street,London,GB,AB1 2CD,Vanilla,EMEA;Sales
+Alex,Smit,alex.smit,alex.smit@oktaice.com,"OU=employees",925-321-1000ext 101,Engineering,Mobile Engineer,"CN=Joseph Baker,OU=Employees",568 Street Blvd,Denver,CO,23454,Chocolate,Engineering;US West
+Catherine,Dunn,catherine.dunn,catherine.dunn@oktaice.com,"OU=employees",925-321-1000ext 103,Marketing,Product Marketing Manager,"CN=James Parks,OU=Employees",312 Santa Clara Ave,Palo Alto,CA,34232,Rocky Road,Marketing;US West
+Edith,Jansen,edith.jansen,edith.jansen@oktaice.com,"OU=employees",925-321-1000ext 104,Sales,East Sales Engineer,"CN=Ana Walters,OU=Employees",75 East Avenue,Newark,NJ,87650,Mint,Sales;US East
+Erin,Richardson,erin.richardson,erin.richardson@oktaice.com,"OU=employees",925-321-1000ext 106,HR,Recruiter,"CN=Emily Boone,OU=Employees",795 Bobbles St.,New York,NY,34987,Strawberry,HR;US West
+Frank,Molen,frank.molen,frank.molen@oktaice.com,"OU=employees",925-321-1000ext 107,Sales,EMEA Sales Engineer,"CN=Ana Walters,OU=Employees",3019 Burlington Way,Wellington,GB,BB2 3FF,Peach,EMEA;Sales
+Gerald,Miles,gerald.miles,gerald.miles@oktaice.com,"OU=employees",925-321-1000ext 108,Engineering,Platform Engineer,"CN=Joseph Baker,OU=Employees",324 Miles Ave,Oakland,CA,89780,Vanilla,Engineering;US West
+Jack,Bailey,jack.bailey,jack.bailey@oktaice.com,"OU=employees",925-321-1000ext 109,Engineering,UI/UX Developer,"CN=Sarah James,OU=Employees",8879 25th St,San Francisco,CA,89703,Chocolate,Engineering;US West
+Jennifer,Jones,jennifer.jones,jennifer.jones@oktaice.com,"OU=employees",925-321-1000ext 111,Engineering,UI/UX Developer,"CN=Sarah James,OU=Employees",5756 Owens Drive,Pleasanton,CA,87960,Rocky Road,Engineering;US West;Domain Admins
+Kent,Vasquez,kent.vasquez,kent.vasquez@oktaice.com,"OU=employees",925-321-1000ext 113,Sales,East Sales Engineer,"CN=Ana Walters,OU=Employees",567 Montgomery Street,Charleston,SC,45678,Pecan,Sales;US East
+Martin,White,martin.white,martin.white@oktaice.com,"OU=employees",925-321-1000ext 114,Sales,East Sales Engineer,"CN=Ana Walters,OU=Employees",45 21st Street,Tampa Bay,FL,99988,Strawberry,Sales;US East
+Matthew,Smith,matthew.smith,matthew.smith@oktaice.com,"OU=employees",925-321-1000ext 115,Sales,EMEA Sales Engineer,"CN=Ana Walters,OU=Employees",962 Londonderry Rd.,London,GB,YY7 2ER,Peach,EMEA;Sales
+Nate,Abbott,nate.abbott,nate.abbott@oktaice.com,"OU=employees",925-321-1000ext 117,Engineering,Mobile Engineer,"CN=Joseph Baker,OU=Employees",5658 Embarcadero Blvd,Oakland,CA,89089,Chocolate,O365;Sales;US West
+Oliver,Banks,oliver.banks,oliver.banks@oktaice.com,"OU=employees",925-321-1000ext 118,Marketing,Marketing Manager,"CN=James Parks,OU=Employees",663 Bluxome Ave.,San Francisco,CA,90789,Vanilla,Marketing;US West
+Stephen,Kim,stephen.kim,stephen.kim@oktaice.com,"OU=employees",925-321-1000ext 120,Engineering,Mobile Engineer,"CN=Joseph Baker,OU=Employees",99 24th St.,San Francisco,CA,98708,Mint,Engineering;US West
+Diane,Smith,diane.smith,diane.smith@oktaice.com,"OU=partners",925-321-1000ext 300,Partners,Core Partner,"CN=Sarah James,OU=Employees",2400 West 25th,New York,NY,78787,Pecan,
+Hope,Valley,hope.valley,hope.valley@oktaice.com,"OU=partners",925-321-1000ext 301,Partners,Core Partner,"CN=Sarah James,OU=Employees",29081 Texas Parkway,Santa Clara,CA,90909,Strawberry,
+John,James,john.james,john.james@oktaice.com,"OU=partners",925-321-1000ext 302,Partners,Mobile Partner,"CN=Sarah James,OU=Employees",814 Lighthouse Bay Crossing,San Francisco,CA,90901,Peach,
+Josh,West,josh.west,josh.west@oktaice.com,"OU=partners",925-321-1000ext 303,Partners,Application Partner,"CN=Sarah James,OU=Employees",4298 Ridgeway Parkway,New York,NY,31904,Vanilla,
+Sam,Finnegan,sam.finnegan,sam.finnegan@oktaice.com,"OU=partners",925-321-1000ext 304,Partners,Core Partner,"CN=Sarah James,OU=Employees",98 David Trail,San Francisco,CA,74103,Chocolate,
+Sarah,Wood,sarah.wood,sarah.wood@oktaice.com,"OU=partners",925-321-1000ext 305,Partners,Application Partner,"CN=Sarah James,OU=Employees",69286 Westend Hill,Millbrae,CA,94257,Vanilla,
+Becky,King,becky.king,becky.king@oktaice.com,"OU=interns",925-321-1000ext 400,Marketing,Marketing Intern,"CN=Sarah James,OU=Employees",34257 Lyons Pass,London,GB,20557,Rocky Road,EMEA;Marketing
+Faith,Hunt,faith.hunt,faith.hunt@oktaice.com,"OU=interns",925-321-1000ext 401,Marketing,Marketing Intern,"CN=James Parks,OU=Employees",0051 Butternut Drive,Dublin,CA,93150,Mint,Marketing;US West
+Frank,Snyder,frank.snyder,frank.snyder@oktaice.com,"OU=interns",925-321-1000ext 402,Engineering,Engineering Intern,"CN=Joseph Baker,OU=Employees",4 Kingsford Crossing,Berkeley,CA,85020,Pecan,Engineering;US West
+Patrick,Peterson,patrick.peterson,patrick.peterson@oktaice.com,"OU=interns",925-321-1000ext 403,Engineering,Engineering Intern,"CN=Joseph Baker,OU=Employees",323 Golf Course Trail,Redwood City,CA,45296,Strawberry,Engineering;US West
+Wendy,Nelson,wendy.nelson,wendy.nelson@oktaice.com,"OU=interns",925-321-1000ext 404,Sales,Sales Intern,"CN=Ana Walters,OU=Employees",3 Pine View Drive,London,GB,30911,Peach,EMEA;Sales
