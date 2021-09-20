@@ -32,6 +32,7 @@ $filename=$args[0];
 $Users=Import-csv $filename;
 $a=1;
 $b=1;
+$rootDomain='DC=' + $(Get-ADDomainController -Discover).Domain.Replace('.',',DC=');
 $failedUsers = @()
 $successUsers = @()
 $VerbosePreference = "Continue"
@@ -65,7 +66,8 @@ Catch {
 			}
 			catch {
 				echo "Creating group: $group";
-				New-ADGroup -Name "$group" -GroupScope "Global" -Path "OU=employees,DC=oktaice,DC=local";
+				$path="OU=employees,"+$rootDomain
+				New-ADGroup -Name "$group" -GroupScope "Global" -Path $path;
 			}
 		}
 	}
@@ -88,7 +90,7 @@ Catch {
 
    $UPN=$User.email # change "$dnsroot to custom domain if you want, by default it will take from DNS ROOT"
 
-   $OU=$User.OU # Choose an Ou where users will be created # Running cmd will show all OU's Get-ADOrganizationalUnit -Filter * | Select-Object -Property DistinguishedName| Out-GridView -PassThru| Select-Object -ExpandProperty DistinguishedName
+   $OU=$User.OU+","+$rootDomain # Choose an Ou where users will be created # Running cmd will show all OU's Get-ADOrganizationalUnit -Filter * | Select-Object -Property DistinguishedName| Out-GridView -PassThru| Select-Object -ExpandProperty DistinguishedName
 
    $email=$User.email # change "$dnsroot to custom domain if you want, by default it will take from DNS ROOT"
 
@@ -127,7 +129,8 @@ New-ADUser @Parameters
 		}
 	}
         if ( !($User.Manager -eq "")) {
-           Set-ADUser -Identity $SAM -Manager $User.Manager
+    		$manager = $User.Manager+","+$rootDomain
+           Set-ADUser -Identity $SAM -Manager $manager
 	}
     }
 
